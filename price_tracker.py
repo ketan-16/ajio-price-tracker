@@ -56,6 +56,7 @@ try:
             best_promos = [{x['code']: x['maxSavingPrice']} for x in product_details.get('potentialPromotions', [])][:3]
 
             product_data = {
+                "product_code": product_code,
                 "name": product_name,
                 "stock": stock_quantity,
                 "availability":stock_status,

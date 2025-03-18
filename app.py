@@ -23,11 +23,21 @@ def home():
     """Render the home page."""
     return render_template("index.html")
 
-@app.route("/product-details")
+@app.route("/product-details", methods=["GET", "POST"])
 def view_product():
     """Render the product details page with price tracking chart."""
-    chart_json = show()  # Fetch price tracking chart data
-    return render_template("view_product_details.html", chart_json=chart_json)
+    if request.method == "POST":
+        product_code = request.form.get("product_code")
+        print("needs implementation")
+        price_history = db.price_history.find({"product_code": product_code})
+        print(list(price_history))
+        # Take the above data, and create a chart from that
+        # chart_json = show()  # Fetch price tracking chart data
+    chart_json = None
+
+    product_list = list(set([x['product_code'] for x in list(db.products.find({}))]))
+    print(product_list)
+    return render_template("product_details.html", product_list=product_list, chart_json=chart_json)
 
 @app.route("/my-product")
 def my_product():
