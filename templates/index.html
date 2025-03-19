@@ -21,50 +21,51 @@
             border-color: #3B82F6;
         }
     </style>
-</head>
+</head> 
 
 <body class="font-sans text-gray-800 bg-gray-50">
     <!-- Navigation -->
     
-<nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-blue-600 text-xl font-bold">Ajio Price Tracker</span>
+    <nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="/"><span class="text-blue-600 text-xl font-bold">Ajio Price Tracker</span></a>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
+                    <a href="/add-product" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        Add Product
+                    </a>
+                    <a href="/product-details" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        View Product Details
+                    </a>
+                    <a href="/my-product" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        My Products
+                    </a>
+                </div>
+                </div>
+                    </button>
                 </div>
             </div>
-            <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-                <a href="/add-product" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                    Add Product
-                </a>
-                <a href="/product-details" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                    View Product Details
-                </a>
-                <a href="/my-product" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                    My Products
-                </a>
-            </div>
-            </div>
-                </button>
-            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
 
     <!-- Hero Section -->
     <section class="hero-gradient py-16 md:py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:flex lg:items-center lg:justify-between">
                 <div class="lg:w-1/2">
-                    <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+                    <h1 class="text-4xl md:ml-10 font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
                         <span class="block">Track Prices,</span>
                         <span class="block text-blue-600">Shop Smarter</span>
                     </h1>
-                    <p class="mt-3 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5">
+                    <p class="mt-3 md:ml-10 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5">
                         Never miss a price drop on Ajio again. Get notified when prices drop on your favorite products.
                     </p>
-                    <div class="mt-8 flex flex-col sm:flex-row sm:space-x-4">
+                    <div class="mt-8 md:ml-10 flex flex-col sm:flex-row sm:space-x-4">
                         <a href="#"
                             class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out">
                             Get Started
@@ -76,7 +77,7 @@
                     </div>
                 </div>
                 <div class="mt-10 lg:mt-0 lg:w-1/2">
-                    <img src="/api/placeholder/600/400" alt="Dashboard preview" class="rounded-lg shadow-lg">
+                    <img src={{ url_for('static',filename='images/feature_pic_2.jpg' ) }} width=600 alt="Dashboard preview" class="md:mt-5 rounded-lg shadow-lg">
                 </div>
             </div>
         </div>
@@ -192,7 +193,7 @@
                         </div>
                     </div>
                     <div class="mt-10 lg:mt-0 lg:w-1/2">
-                        <img src="/api/placeholder/600/400" alt="How it works" class="rounded-lg shadow-lg">
+                        <img src={{ url_for('static',filename='images/feature_pic_1.jpg') }} alt="How it works" class="rounded-lg shadow-lg float-right">
                     </div>
                 </div>
             </div>

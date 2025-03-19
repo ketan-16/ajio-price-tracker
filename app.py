@@ -20,8 +20,19 @@ db = mongo.get_db()
 
 @app.route("/")
 def home():
-    """Render the home page."""
     return render_template("index.html")
+
+@app.route("/my-product")
+def my_product():
+    return render_template("my_product.html")
+
+@app.route("/product-det")
+def product_det():
+    return render_template("product_details.html")
+
+@app.route("/add_prod")
+def add_prod():
+    return render_template("add_product.html")
 
 @app.route("/product-details", methods=["GET", "POST"])
 def view_product():
@@ -39,10 +50,7 @@ def view_product():
     print(product_list)
     return render_template("product_details.html", product_list=product_list, chart_json=chart_json)
 
-@app.route("/my-product")
-def my_product():
-    """Render the My Products page."""
-    return render_template("my_product.html")
+
 
 @app.route("/add-product", methods=["GET", "POST"])
 def add_product():
@@ -74,7 +82,7 @@ def add_product():
             flash(f"An unexpected error occurred: {str(e)}", "error")
             return redirect(url_for("add_product"))
 
-    return render_template("add_product.html")
+    return redirect(url_for("add_prod"))
 
 if __name__ == "__main__":
     app.run(debug=True)
