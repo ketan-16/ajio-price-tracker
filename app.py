@@ -37,7 +37,6 @@ def fetch_product_data(product_code):
         res.raise_for_status()
         product_details = res.json()
 
-        
         current_price = product_details["baseOptions"][0]["options"][0]["priceData"]["value"]
         return float(current_price)
     except Exception as e:
@@ -52,7 +51,6 @@ def generate_chart(price_history):
 
     for entry in price_history:
         try:
-            
             date_obj = (
                 entry["created_at"]
                 if isinstance(entry["created_at"], datetime)
@@ -67,7 +65,7 @@ def generate_chart(price_history):
     if not dates or not prices:
         return None
 
-   
+
     fig = go.Figure(
         data=go.Scatter(x=dates, y=prices, mode="lines+markers", name="Price")
     )
@@ -82,7 +80,6 @@ def generate_chart(price_history):
         paper_bgcolor="#1e1e1e",
     )
 
-   
     return pio.to_json(fig)
 
 
@@ -109,11 +106,10 @@ def view_product():
             if not price_history:
                 flash("No price history found for the selected product.", "info")
             else:
-               
                 chart_json = generate_chart(price_history)
                 flash(f"Data fetched for product {product_code}", "success")
 
-    
+
     product_list = list(set([x["product_code"] for x in db.products.find()]))
     return render_template(
         "product_details.html", product_list=product_list, chart_json=chart_json
@@ -138,17 +134,14 @@ def add_product():
                 if match:
                     product_code = match.group(1)
 
-                    
                     current_price = fetch_product_data(product_code)
 
-                    
                     db.products.update_one(
                         {"product_code": product_code},
                         {"$setOnInsert": {"created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}},
                         upsert=True,
                     )
 
-                    
                     today_date = datetime.now().strftime("%Y-%m-%d")
                     existing_price = db.price_history.find_one(
                         {"product_code": product_code, "created_at": {"$regex": f"^{today_date}"}}

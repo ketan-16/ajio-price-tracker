@@ -25,8 +25,16 @@ headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.5",
     "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Alt-Used": "www.ajio.com",
     "Connection": "keep-alive",
+    "Cookie": "bm_ss=ab8e18ef4e; bm_s=YAAQ3ZfmZ68AvFmVAQAA/Jf3fgOGq1NL288lfLqYF7VDSf7lHynGLwNHBx48G5UsxP/zAnqHuwkqj6I0cCsLT+WbG8PWLddM9785QeyaTdnvjtGK5ufgRUCfDLUV8g/HjUNP1zOquVMhoYjoeo1P892/EQRGerrbSny9j89YwETCo3lWrvotGt28r1YXHkXgzI/34oZYAlDqUGgvZwVgNOuszLIWSpMU4yAZ3Hvue90K5XXM9RH1zjrnnC3htWRegcJm5rRg1xKpM5fIez54E9PVXdgKhYIGuC0goPAi23VVvknTwAh9GX7xdtEfwOZYEMtP5ENMzZ5tJs4Bo/M1BoJxwiUu3Vmxy3fI9WkGK8xBHFW4oqn8bHbuQ0BujoLOjzC6+BfQ8x6EIxlGVZtjFhua3cCjtLH9k2tGl67COe3Vhoq8YCrFCa77MTZbISe/OufF+t9yNts=; V=201; TS01de1f4a=01ef61aed01f41cf51aca91fc80066339f8defe4b958785bbadd010cf69a795032aa4decfe213b2a91af76a8ab4307ff0d3d388de23bf02a917c9881e2e74acc3eb3d85dcb1da9379ac296eb49c0654abb833df2f970cbbf24aa59c90e31496ef8b11b9c86; TS01ac9890=01ef61aed0594ad3fe99a91e99cece069c1f5cb2ae58785bbadd010cf69a795032aa4decfee31980630ffff4d66e68c26d1183e871",
     "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Priority": "u=0, i",
+    "TE": "trailers"
 }
 
 
@@ -80,7 +88,7 @@ try:
                         "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),  # Match date & time correctly
                     },
                     {"$set": product_data},
-                    upsert=True,  
+                    upsert=True,
                 )
             except KeyError as e:
                 logging.warning(f"Product data incomplete or removed, skipping. Error: {e}")
