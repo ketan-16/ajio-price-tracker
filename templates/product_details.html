@@ -1,68 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product_Details</title>
+    <title>Product Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body class="bg-white-900 text-white min-h-screen flex items-center flex-col">
-    <nav class="bg-white shadow-sm sticky top-0 left-0 w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <span class="text-blue-600 text-xl font-bold">Ajio Price Tracker</span>
-                    </div>
-                </div>
-                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-                    <a href="/add-product"
-                        class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                        Add Product
-                    </a>
-                    <a href="/product-details"
-                        class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                        View Product Details
-                    </a>
-                    <a href="/my-product"
-                        class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                        My Products
-                    </a>
-                </div>
-            </div>
-            </button>
-        </div>
-        </div>
-        </div>
-    </nav>
+
+   
+    {% include "navbar.html" %}
 
     <div class="container mt-10 text-black">
-        <div class="bg-white-800 p-6 rounded-xl shadow-lg"> <!-- Increased max width -->
+        <div class="bg-white-800 p-6 rounded-xl shadow-lg">
             <h2 class="text-xl font-semibold text-center mb-4">Product Price Comparison</h2>
 
-
             <form class="max-w-sm mx-auto flex justify-center" method="POST">
-
                 <div class="flex">
                     <label for="product_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a product</label>
-                <select id="product_code"
-                    class="w-3xl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <!-- iteratively populate these options using python -->
-                    {% for product in product_list %}    
-                        <option value="{{product}}">{{product}}</option>
-                    {% endfor %}    
-                </select>
-                
+                    <select id="product_code"
+                        class="w-3xl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        {% for product in product_list %}    
+                            <option value="{{product}}">{{product}}</option>
+                        {% endfor %}    
+                    </select>
                 </div>
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mx-2">Get History</button>
             </form>
-
         </div>
     </div>
 </body>
-
 </html>
