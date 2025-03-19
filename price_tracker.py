@@ -5,20 +5,20 @@ from dotenv import load_dotenv
 from db import Database
 from datetime import datetime
 
-# Load environment variables
+
 load_dotenv()
 MONGO_SRV = os.getenv("MONGO_SRV")
 mongo = Database(MONGO_SRV)
 db = mongo.get_db()
 
-# Configure logging
+
 logging.basicConfig(
     filename="tracker_logs.log",
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
-# Request headers
+
 headers = {
     "Host": "www.ajio.com",
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:136.0) Gecko/20100101 Firefox/136.0",
@@ -80,7 +80,7 @@ try:
                         "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),  # Match date & time correctly
                     },
                     {"$set": product_data},
-                    upsert=True,  # Insert if document does not exist
+                    upsert=True,  
                 )
             except KeyError as e:
                 logging.warning(f"Product data incomplete or removed, skipping. Error: {e}")
