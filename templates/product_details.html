@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product_Details</title>
+    <title>Product Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
-<body class="bg-white-900 text-white min-h-screen flex items-center flex-col">
+<body class="bg-gray-100 text-black min-h-screen flex items-center flex-col">
+    <!-- ✅ Navbar -->
     <nav class="bg-white shadow-sm sticky top-0 left-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -34,33 +35,59 @@
                     </a>
                 </div>
             </div>
-            </button>
-        </div>
-        </div>
         </div>
     </nav>
 
-    <div class="container mt-10 text-black">
-        <div class="bg-white-800 p-6 rounded-xl shadow-lg"> <!-- Increased max width -->
-            <h2 class="text-xl font-semibold text-center mb-4">Product Price Comparison</h2>
+    <!-- ✅ Main Container -->
+    <div class="container mt-10 px-4 sm:px-6 lg:px-8 w-full max-w-4xl">
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-center mb-6">Product Price Comparison</h2>
 
-
-            <form class="max-w-sm mx-auto flex justify-center" method="POST">
-
-                <div class="flex">
-                    <label for="product_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a product</label>
-                <select id="product_code"
-                    class="w-3xl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <!-- iteratively populate these options using python -->
-                    {% for product in product_list %}    
-                        <option value="{{product}}">{{product}}</option>
-                    {% endfor %}    
-                </select>
-                
+            <!-- ✅ Form to Fetch Price History -->
+            <form method="POST" class="flex justify-center items-center gap-4">
+                <div class="w-1/2">
+                    <label for="product_code"
+                        class="block text-sm font-medium text-gray-700 mb-2">Select a product</label>
+                    <select id="product_code" name="product_code"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
+                        <!-- ✅ Populate product list dynamically -->
+                        {% for product in product_list %}
+                        <option value="{{ product }}">{{ product }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mx-2">Get History</button>
+
+                <button type="submit"
+                    class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                    Get History
+                </button>
             </form>
 
+            <!-- ✅ Render Chart if Available -->
+            {% if chart_json %}
+            <div id="chart-container" class="mt-8 bg-gray-50 p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-semibold mb-4">Price History Chart</h3>
+                <div id="chart" class="w-full h-80"></div>
+            </div>
+            <script>
+                // ✅ Load Plotly Chart
+                let chartJson = JSON.parse('{{ chart_json|safe }}');
+                Plotly.newPlot("chart", chartJson.data, chartJson.layout, { responsive: true });
+            </script>
+            {% endif %}
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="mt-6">
+                {% for category, message in messages %}
+                <div
+                    class="text-sm p-2 rounded-md mb-2 {% if category == 'success' %} bg-green-100 text-green-800 {% elif category == 'error' %} bg-red-100 text-red-800 {% else %} bg-yellow-100 text-yellow-800 {% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
         </div>
     </div>
 </body>
